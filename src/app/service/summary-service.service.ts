@@ -16,28 +16,29 @@ export class SummaryServiceService {
 
   constructor(
     private http:HttpClient    ) {
-    this.header={Headers:new HttpHeaders({
-          "Content-type":"application/json"
-        })}
+      this.header={Headers:new HttpHeaders({
+        "Content-type":"application/json"
+        ,'X-Master-Key':'$2a$10$8rkCpTdmdUdcXafaJZuWreEaLYhlfRHBLZiSZ2J3Ri3rCA99EhDKy'
+      })}
    }
 
    getSummaries():Observable<Summary[]>{
-      return this.http.get<Summary[]>(`${environment.apiUrl}/summary`,this.header);
+      return this.http.get<Summary[]>(`${environment.jsonBinApiUrl}/summary`,this.header);
     }
    getSummary(subject:SubjectInface):Observable<Summary[]>{
-      return this.http.get<Summary[]>(`${environment.apiUrl}/summary?subjectId=${subject.id}`,this.header);
+      return this.http.get<Summary[]>(`${environment.jsonBinApiUrl}/summary?subjectId=${subject.id}`,this.header);
     }
      getSummaryByStudentId(student:User):Observable<Summary[]>{
-        return this.http.get<Summary[]>(`${environment.apiUrl}/summary?uploadedBy=${student.id}`,this.header);
+        return this.http.get<Summary[]>(`${environment.jsonBinApiUrl}/summary?uploadedBy=${student.id}`,this.header);
       }
     AddSummary(summary:Summary):Observable<Summary>{
-      return this.http.post<Summary>(`${environment.apiUrl}/summary`,summary,this.header);
+      return this.http.post<Summary>(`${environment.jsonBinApiUrl}/summary`,summary,this.header);
     }
     DeleteSummary(summary:Summary):Observable<Summary>{
-      return this.http.delete<Summary>(`${environment.apiUrl}/summary/${summary.id}`,this.header)
+      return this.http.delete<Summary>(`${environment.jsonBinApiUrl}/summary/${summary.id}`,this.header)
     }
     updateSummary(summary:Summary):Observable<Summary>{
-        return this.http.patch<Summary>(`${environment.apiUrl}/summary/${summary.id}`,summary,this.header);
+        return this.http.patch<Summary>(`${environment.jsonBinApiUrl}/summary/${summary.id}`,summary,this.header);
       }
 
       clickSummary(id:string){

@@ -15,6 +15,7 @@ export class CollegeServiceService {
   private header = {
     headers: new HttpHeaders({
       "Content-Type": "application/json"
+      ,'X-Master-Key':'$2a$10$8rkCpTdmdUdcXafaJZuWreEaLYhlfRHBLZiSZ2J3Ri3rCA99EhDKy'
     })
   };
 
@@ -28,73 +29,73 @@ export class CollegeServiceService {
 
   //=============== College  Service ==============
   getColleges(): Observable<College[]> {
-    return this.safeHttpCall<College[]>(`${environment.apiUrl}/college`);
+    return this.safeHttpCall<College[]>(`${environment.jsonBinApiUrl}/college`);
   }
 
   getCollege(Id: string): Observable<College> {
-    return this.safeHttpCall<College>(`${environment.apiUrl}/college/${Id}`);
+    return this.safeHttpCall<College>(`${environment.jsonBinApiUrl}/college/${Id}`);
   }
 
   AddCollege(college: College): Observable<College> {
-    return this.safeHttpPost<College>(`${environment.apiUrl}/college`, college);
+    return this.safeHttpPost<College>(`${environment.jsonBinApiUrl}/college`, college);
   }
 
   DeleteCollege(college: College): Observable<College> {
-    return this.safeHttpDelete<College>(`${environment.apiUrl}/college/${college.id}`);
+    return this.safeHttpDelete<College>(`${environment.jsonBinApiUrl}/college/${college.id}`);
   }
 
   updateCollege(college: College): Observable<College> {
-    return this.safeHttpPatch<College>(`${environment.apiUrl}/college/${college.id}`, college);
+    return this.safeHttpPatch<College>(`${environment.jsonBinApiUrl}/college/${college.id}`, college);
   }
 
   //================ Departments  Service =====================
   getDepartments(id: string): Observable<Department[]> {
-    return this.safeHttpCall<Department[]>(`${environment.apiUrl}/department?collegeId=${id}`);
+    return this.safeHttpCall<Department[]>(`${environment.jsonBinApiUrl}/department?collegeId=${id}`);
   }
 
   getDepartment_Doctor(): Observable<Department[]> {
-    return this.safeHttpCall<Department[]>(`${environment.apiUrl}/department`);
+    return this.safeHttpCall<Department[]>(`${environment.jsonBinApiUrl}/department`);
   }
 
   getDepartmentone(id: string): Observable<Department> {
-    return this.safeHttpCall<Department>(`${environment.apiUrl}/department/${id}`);
+    return this.safeHttpCall<Department>(`${environment.jsonBinApiUrl}/department/${id}`);
   }
 
   AddDepartment(department: Department): Observable<Department> {
-    return this.safeHttpPost<Department>(`${environment.apiUrl}/department`, department);
+    return this.safeHttpPost<Department>(`${environment.jsonBinApiUrl}/department`, department);
   }
 
   DeleteDepartment(department: Department): Observable<Department> {
-    return this.safeHttpDelete<Department>(`${environment.apiUrl}/department/${department.id}`);
+    return this.safeHttpDelete<Department>(`${environment.jsonBinApiUrl}/department/${department.id}`);
   }
 
   updateDepartment(department: Department): Observable<Department> {
-    return this.safeHttpPatch<Department>(`${environment.apiUrl}/department/${department.id}`, department);
+    return this.safeHttpPatch<Department>(`${environment.jsonBinApiUrl}/department/${department.id}`, department);
   }
 
   //================= Year  Service===================
   getYears_Doctor(): Observable<Year[]> {
-    return this.safeHttpCall<Year[]>(`${environment.apiUrl}/year`);
+    return this.safeHttpCall<Year[]>(`${environment.jsonBinApiUrl}/year`);
   }
 
   getYears(id: string): Observable<Year[]> {
-    return this.safeHttpCall<Year[]>(`${environment.apiUrl}/year?departmentId=${id}`);
+    return this.safeHttpCall<Year[]>(`${environment.jsonBinApiUrl}/year?departmentId=${id}`);
   }
 
   getYear(id: string): Observable<Year> {
-    return this.safeHttpCall<Year>(`${environment.apiUrl}/year/${id}`);
+    return this.safeHttpCall<Year>(`${environment.jsonBinApiUrl}/year/${id}`);
   }
 
   AddYear(year: Year): Observable<Year> {
-    return this.safeHttpPost<Year>(`${environment.apiUrl}/year`, year);
+    return this.safeHttpPost<Year>(`${environment.jsonBinApiUrl}/year`, year);
   }
 
   DeleteYear(year: Year): Observable<Year> {
-    return this.safeHttpDelete<Year>(`${environment.apiUrl}/year/${year.id}`);
+    return this.safeHttpDelete<Year>(`${environment.jsonBinApiUrl}/year/${year.id}`);
   }
 
   updateYear(year: Year): Observable<Year> {
-    return this.safeHttpPatch<Year>(`${environment.apiUrl}/year/${year.id}`, year);
+    return this.safeHttpPatch<Year>(`${environment.jsonBinApiUrl}/year/${year.id}`, year);
   }
 
   setDepartment(depart: Department) {

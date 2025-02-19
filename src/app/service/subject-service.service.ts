@@ -50,28 +50,29 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
     private exam_Service:ExamServiceService,
     private review_Service:ReviewService,
     ) {
-    this.header={Headers:new HttpHeaders({
-          "Content-type":"application/json"
-        })}
+      this.header={Headers:new HttpHeaders({
+        "Content-type":"application/json"
+        ,'X-Master-Key':'$2a$10$8rkCpTdmdUdcXafaJZuWreEaLYhlfRHBLZiSZ2J3Ri3rCA99EhDKy'
+      })}
    }
 
    getSubjects(id:string):Observable<SubjectInface[]>{
-      return this.http.get<SubjectInface[]>(`${environment.apiUrl}/subject?yearId=${id}`,this.header);
+      return this.http.get<SubjectInface[]>(`${environment.jsonBinApiUrl}/subject?yearId=${id}`,this.header);
     }
     getSubject_Doctor():Observable<SubjectInface[]>{
-      return this.http.get<SubjectInface[]>(`${environment.apiUrl}/subject`,this.header);
+      return this.http.get<SubjectInface[]>(`${environment.jsonBinApiUrl}/subject`,this.header);
     }
    getSubjectone(id:string):Observable<SubjectInface>{
-      return this.http.get<SubjectInface>(`${environment.apiUrl}/subject/${id}`,this.header);
+      return this.http.get<SubjectInface>(`${environment.jsonBinApiUrl}/subject/${id}`,this.header);
     }
     AddSubject(subject:SubjectInface):Observable<SubjectInface>{
-      return this.http.post<SubjectInface>(`${environment.apiUrl}/subject`,subject,this.header);
+      return this.http.post<SubjectInface>(`${environment.jsonBinApiUrl}/subject`,subject,this.header);
     }
     DeleteSubject(subject:SubjectInface):Observable<SubjectInface>{
-      return this.http.delete<SubjectInface>(`${environment.apiUrl}/subject/${subject.id}`,this.header);
+      return this.http.delete<SubjectInface>(`${environment.jsonBinApiUrl}/subject/${subject.id}`,this.header);
     }
     updateSubject(subject:SubjectInface):Observable<SubjectInface>{
-      return this.http.patch<SubjectInface>(`${environment.apiUrl}/subject/${subject.id}`,subject,this.header);
+      return this.http.patch<SubjectInface>(`${environment.jsonBinApiUrl}/subject/${subject.id}`,subject,this.header);
     }
 
     setData(year:Year){

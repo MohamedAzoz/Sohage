@@ -23,66 +23,19 @@ export class NoticesService {
        private collge_service:CollegeServiceService
   ) {
     this.header={Headers:new HttpHeaders({
-                "Content-type":"application/json"
-              })}
+      "Content-type":"application/json"
+      ,'X-Master-Key':'$2a$10$8rkCpTdmdUdcXafaJZuWreEaLYhlfRHBLZiSZ2J3Ri3rCA99EhDKy'
+    })}
   }
-// AddNotification(type:string,subjectId:string,StudentName:string,URL_Content:string){
-//   let ObDepartment:Observable<Department>=new Observable<Department>();
-//   let Obcollge:Observable<College>=new Observable<College>();
-//   let ObYear:Observable<Year>=new Observable<Year>();
-//   let StudentCollege:string=''
-//   let subjectName:string=''
-//   let StudentYear:string=''
-//   this.subject_service.getSubjectone(subjectId).subscribe((subject)=>{
-//     if(subject){
-//       subjectName=subject.name
-//      ObYear=this.collge_service.getYear(subject.yearId)
-//     }
-// });
-// ObYear.subscribe((year)=>{
-//   if(year){
-//     StudentYear=year.name
-//     ObDepartment=this.collge_service.getDepartmentone(year.departmentId)
-//   }
-// })
-// ObDepartment.subscribe((dept)=>{
-//   if(dept){
-//     Obcollge=this.collge_service.getCollege(dept.collegeId)
-//   }
-// });
-// Obcollge.subscribe((college)=>{
-//   if(college){
-//     StudentCollege=college.name
-//   }
-// });
-// if(subjectName && StudentCollege && StudentName){
-//   const oneNotification:Notification={
-  // 'id':subjectId+URL_Content+StudentYear+type,
-  //    'type':type,
-//    'subjectName':subjectName,
-//    'StudentName':StudentName,
-//    'StudentCollege':StudentCollege,
-//    'StudentYear':StudentYear,
-//    'URL_Content':URL_Content,
-//    'show':false,
-//    'time':new Date
-//  }
-//  this.notices.unshift(oneNotification);
-//  this.NotificationBehavior.next([...this.notices]);
-// }else{
-//   console.log("error in Notification");
-
-// }
-//   }
 
 get_All_Notification():Observable<Notification[]>{
-  return this.http.get<Notification[]>(`${environment.apiUrl}/notification`,this.header);
+  return this.http.get<Notification[]>(`${environment.jsonBinApiUrl}/notification`,this.header);
 }
 Add_New_Notification(notification:Notification):Observable<Notification>{
-  return this.http.post<Notification>(`${environment.apiUrl}/notification`,notification,this.header);
+  return this.http.post<Notification>(`${environment.jsonBinApiUrl}/notification`,notification,this.header);
 }
 DeleteNotification(notification:Notification):Observable<Notification>{
-   return this.http.delete<Notification>(`${environment.apiUrl}/notification/${notification.id}`,this.header);
+   return this.http.delete<Notification>(`${environment.jsonBinApiUrl}/notification/${notification.id}`,this.header);
 }
 AddNotification(type: string, subjectId: string, StudentName: string, URL_Content: string) {
   this.subject_service.getSubjectone(subjectId).pipe(

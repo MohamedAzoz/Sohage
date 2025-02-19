@@ -15,32 +15,33 @@ public currentExam=this.exam.asObservable();
  header={}
   constructor(
     private http:HttpClient    ) {
-    this.header={Headers:new HttpHeaders({
-          "Content-type":"application/json"
-        })}
+      this.header={Headers:new HttpHeaders({
+        "Content-type":"application/json"
+        ,'X-Master-Key':'$2a$10$8rkCpTdmdUdcXafaJZuWreEaLYhlfRHBLZiSZ2J3Ri3rCA99EhDKy'
+      })}
    }
 
    getExams():Observable<Exam[]>{
-      return this.http.get<Exam[]>(`${environment.apiUrl}/exam/`,this.header);
+      return this.http.get<Exam[]>(`${environment.jsonBinApiUrl}/exam/`,this.header);
     }
    getExam(subject:SubjectInface):Observable<Exam[]>{
-      return this.http.get<Exam[]>(`${environment.apiUrl}/exam?subjectId=${subject.id}`,this.header);
+      return this.http.get<Exam[]>(`${environment.jsonBinApiUrl}/exam?subjectId=${subject.id}`,this.header);
     }
   //  getExamone(id:string):Observable<Exam>{
-  //     return this.http.get<Exam>(`${environment.apiUrl}/exam?id=${id}`,this.header);
+  //     return this.http.get<Exam>(`${environment.jsonBinApiUrl}/exam?id=${id}`,this.header);
   //   }
    getExamByStudentId(student:User):Observable<Exam[]>{
-      return this.http.get<Exam[]>(`${environment.apiUrl}/exam?uploadedBy=${student.id}`,this.header);
+      return this.http.get<Exam[]>(`${environment.jsonBinApiUrl}/exam?uploadedBy=${student.id}`,this.header);
     }
     AddExam(exam:Exam):Observable<Exam>{
-      return this.http.post<Exam>(`${environment.apiUrl}/exam`,exam,this.header);
+      return this.http.post<Exam>(`${environment.jsonBinApiUrl}/exam`,exam,this.header);
     }
     DeleteExam(exam:Exam):Observable<Exam>{
-      return this.http.delete<Exam>(`${environment.apiUrl}/exam/${exam.id}`,this.header)
+      return this.http.delete<Exam>(`${environment.jsonBinApiUrl}/exam/${exam.id}`,this.header)
     }
 
     updateExam (exam:Exam):Observable<Exam>{
-      return this.http.patch<Exam>(`${environment.apiUrl}/exam/${exam.id}`,exam,this.header);
+      return this.http.patch<Exam>(`${environment.jsonBinApiUrl}/exam/${exam.id}`,exam,this.header);
     }
 
     clickExam(id:string){

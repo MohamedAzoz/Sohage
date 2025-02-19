@@ -1,5 +1,4 @@
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:3000',
-
+  production: true,
+  jsonBinApiUrl: 'https://api.jsonbin.io/v3/b/67b59559ad19ca34f8097816',
 };

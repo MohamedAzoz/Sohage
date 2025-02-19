@@ -24,27 +24,28 @@ export class StudentService implements OnInit {
 
   ) {
     this.header={Headers:new HttpHeaders({
-                "Content-type":"application/json"
-            })}
+      "Content-type":"application/json"
+      ,'X-Master-Key':'$2a$10$8rkCpTdmdUdcXafaJZuWreEaLYhlfRHBLZiSZ2J3Ri3rCA99EhDKy'
+    })}
    }
   ngOnInit(): void {
 
   }
   setDataUser(user:StudentData):Observable<StudentData>{
-    return this.http.post<StudentData>(`${environment.apiUrl}/student_data`,user,this.header)
+    return this.http.post<StudentData>(`${environment.jsonBinApiUrl}/student_data`,user,this.header)
   }
 getDataUsers():Observable<StudentData[]>{
-    return this.http.get<StudentData[]>(`${environment.apiUrl}/student_data`)
+    return this.http.get<StudentData[]>(`${environment.jsonBinApiUrl}/student_data`)
   }
 getDataUser(id:string):Observable<StudentData>{
-    return this.http.get<StudentData>(`${environment.apiUrl}/student_data/${id}`);
+    return this.http.get<StudentData>(`${environment.jsonBinApiUrl}/student_data/${id}`);
   }
 
 deleteDataUser(users:StudentData):Observable<StudentData>{
-      return this.http.delete<StudentData>(`${environment.apiUrl}/student_data/${users.id}`,this.header)
+      return this.http.delete<StudentData>(`${environment.jsonBinApiUrl}/student_data/${users.id}`,this.header)
     }
   updateDataUser (users:StudentData):Observable<StudentData>{
-    return this.http.patch<StudentData>(`${environment.apiUrl}/student_data/${users.id}`,users,this.header);
+    return this.http.patch<StudentData>(`${environment.jsonBinApiUrl}/student_data/${users.id}`,users,this.header);
   }
 
   checkStudent(username:string){

@@ -17,27 +17,28 @@ header={}
 
   constructor(
     private http:HttpClient    ) {
-    this.header={Headers:new HttpHeaders({
-          "Content-type":"application/json"
-        })}
+      this.header={Headers:new HttpHeaders({
+        "Content-type":"application/json"
+        ,'X-Master-Key':'$2a$10$8rkCpTdmdUdcXafaJZuWreEaLYhlfRHBLZiSZ2J3Ri3rCA99EhDKy'
+      })}
    }
    getReviews():Observable<Review[]>{
-      return this.http.get<Review[]>(`${environment.apiUrl}/review`,this.header);
+      return this.http.get<Review[]>(`${environment.jsonBinApiUrl}/review`,this.header);
     }
    getReview(subject:SubjectInface):Observable<Review[]>{
-      return this.http.get<Review[]>(`${environment.apiUrl}/review?subjectId=${subject.id}`,this.header);
+      return this.http.get<Review[]>(`${environment.jsonBinApiUrl}/review?subjectId=${subject.id}`,this.header);
     }
      getReviewByStudentId(student:User):Observable<Review[]>{
-          return this.http.get<Review[]>(`${environment.apiUrl}/review?uploadedBy=${student.id}`,this.header);
+          return this.http.get<Review[]>(`${environment.jsonBinApiUrl}/review?uploadedBy=${student.id}`,this.header);
         }
     AddReview(review:Review):Observable<Review>{
-      return this.http.post<Review>(`${environment.apiUrl}/review`,review,this.header);
+      return this.http.post<Review>(`${environment.jsonBinApiUrl}/review`,review,this.header);
     }
     DeleteReview(review:Review):Observable<Review>{
-      return this.http.delete<Review>(`${environment.apiUrl}/review/${review.id}`,this.header)
+      return this.http.delete<Review>(`${environment.jsonBinApiUrl}/review/${review.id}`,this.header)
     }
     updateReview (review:Review):Observable<Review>{
-      return this.http.patch<Review>(`${environment.apiUrl}/review/${review.id}`,review,this.header);
+      return this.http.patch<Review>(`${environment.jsonBinApiUrl}/review/${review.id}`,review,this.header);
     }
     clickReview(id:string){
       this.getReviews().subscribe((data)=>{

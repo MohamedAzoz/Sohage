@@ -16,28 +16,29 @@ header={}
 
   constructor(
     private http:HttpClient    ) {
-    this.header={Headers:new HttpHeaders({
-          "Content-type":"application/json"
-        })}
+      this.header={Headers:new HttpHeaders({
+        "Content-type":"application/json"
+        ,'X-Master-Key':'$2a$10$8rkCpTdmdUdcXafaJZuWreEaLYhlfRHBLZiSZ2J3Ri3rCA99EhDKy'
+      })}
    }
 
    getTests():Observable<Test[]>{
-      return this.http.get<Test[]>(`${environment.apiUrl}/test`,this.header);
+      return this.http.get<Test[]>(`${environment.jsonBinApiUrl}/test`,this.header);
     }
    getTest(subject:SubjectInface):Observable<Test[]>{
-      return this.http.get<Test[]>(`${environment.apiUrl}/test?subjectId=${subject.id}`,this.header);
+      return this.http.get<Test[]>(`${environment.jsonBinApiUrl}/test?subjectId=${subject.id}`,this.header);
     }
      getTestByStudentId(student:User):Observable<Test[]>{
-              return this.http.get<Test[]>(`${environment.apiUrl}/test?uploadedBy=${student.id}`,this.header);
+              return this.http.get<Test[]>(`${environment.jsonBinApiUrl}/test?uploadedBy=${student.id}`,this.header);
             }
     AddTest(test:Test):Observable<Test>{
-      return this.http.post<Test>(`${environment.apiUrl}/test`,test,this.header);
+      return this.http.post<Test>(`${environment.jsonBinApiUrl}/test`,test,this.header);
     }
     DeleteTest(test:Test):Observable<Test>{
-      return this.http.delete<Test>(`${environment.apiUrl}/test/${test.id}`,this.header)
+      return this.http.delete<Test>(`${environment.jsonBinApiUrl}/test/${test.id}`,this.header)
     }
     updateTest(test:Test):Observable<Test>{
-      return this.http.patch<Test>(`${environment.apiUrl}/test/${test.id}`,test,this.header);
+      return this.http.patch<Test>(`${environment.jsonBinApiUrl}/test/${test.id}`,test,this.header);
     }
 
 

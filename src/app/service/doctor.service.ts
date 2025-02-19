@@ -51,32 +51,33 @@ private doctorData=new BehaviorSubject<DoctorData|undefined>(undefined);
             private http:HttpClient,
 
   ) {
-     this.header={Headers:new HttpHeaders({
-                      "Content-type":"application/json"
-                    })}
+    this.header={Headers:new HttpHeaders({
+      "Content-type":"application/json"
+      ,'X-Master-Key':'$2a$10$8rkCpTdmdUdcXafaJZuWreEaLYhlfRHBLZiSZ2J3Ri3rCA99EhDKy'
+    })}
   }
   ngOnInit(): void {
 
   }
 
 setDataUser(user:DoctorData):Observable<DoctorData>{
-    return this.http.post<DoctorData>(`${environment.apiUrl}/doctor_data`,user,this.header)
+    return this.http.post<DoctorData>(`${environment.jsonBinApiUrl}/doctor_data`,user,this.header)
   }
 
 getDataUsers():Observable<DoctorData[]>{
-    return this.http.get<DoctorData[]>(`${environment.apiUrl}/doctor_data`)
+    return this.http.get<DoctorData[]>(`${environment.jsonBinApiUrl}/doctor_data`)
   }
 
 getDataUser(id:string):Observable<DoctorData>{
-    return this.http.get<DoctorData>(`${environment.apiUrl}/doctor_data?doctorId=${id}`)
+    return this.http.get<DoctorData>(`${environment.jsonBinApiUrl}/doctor_data?doctorId=${id}`)
   }
 
 deleteDataUser(users:DoctorData):Observable<DoctorData>{
-      return this.http.delete<DoctorData>(`${environment.apiUrl}/doctor_data/${users.id}`,this.header)
+      return this.http.delete<DoctorData>(`${environment.jsonBinApiUrl}/doctor_data/${users.id}`,this.header)
     }
 
 updateDataUser (users:DoctorData):Observable<DoctorData>{
-     return this.http.patch<DoctorData>(`${environment.apiUrl}/doctor_data/${users.id}`,users,this.header);
+     return this.http.patch<DoctorData>(`${environment.jsonBinApiUrl}/doctor_data/${users.id}`,users,this.header);
   }
   checkDoctor(username:string){
       this.userService.getUsers().subscribe((role)=>{
