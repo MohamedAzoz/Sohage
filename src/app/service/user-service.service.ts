@@ -1,85 +1,42 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { environment } from '../../environments/environment.development';
 import { CookieService } from 'ngx-cookie-service';
-import { isPlatformBrowser } from '@angular/common';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
-  private headers = new HttpHeaders({
-    'Content-Type': 'application/json'
-  });
-
+header={}
   constructor(
-    private http: HttpClient,
-    private cookieService: CookieService,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+    private http:HttpClient,
+        private CookieService:CookieService,
 
-  getUsers(): Observable<User[]> {
-    if (isPlatformBrowser(this.platformId)) {
-      return this.http.get<User[]>(`${environment.apiUrl}/users`, { headers: this.headers }).pipe(
-        catchError(error => {
-          console.error('Error fetching users:', error);
-          return of([]); // إرجاع مصفوفة فارغة عند حدوث خطأ
-        })
-      );
-    } else {
-      return of([]); // عدم تحميل البيانات في بيئة SSR
+  ) {
+
+        this.header={Headers:new HttpHeaders({
+              "Content-type":"application/json"
+            })}
+   }
+  getUsers():Observable<User[]>{
+    return this.http.get<User[]>(`${environment.apiUrl}/users`)
+  }
+  getuserone(username:string):Observable<User>{
+    return this.http.get<User>(`${environment.apiUrl}/users?username=${username}`)
+  }
+  adduser(user:User):Observable<User>{
+    return this.http.post<User>(`${environment.apiUrl}/users`,user,this.header)
+  }
+DeleteUser(users:User):Observable<User>{
+      return this.http.delete<User>(`${environment.apiUrl}/users/${users.id}`,this.header)
     }
+  updateUser (users:User):Observable<User>{
+    return this.http.patch<User>(`${environment.apiUrl}/users/${users.id}`,users,this.header);
+  }
+  updatePassword(users:User):Observable<User>{
+    return this.http.patch<User>(`${environment.apiUrl}/users/${users.id}`,users,this.header);
   }
 
-  getuserone(username: string): Observable<User> {
-    if (isPlatformBrowser(this.platformId)) {
-      return this.http.get<User>(`${environment.apiUrl}/users?username=${username}`, { headers: this.headers }).pipe(
-        catchError(error => {
-          console.error('Error fetching user:', error);
-          return of(null as any); // إرجاع null عند حدوث خطأ
-        })
-      );
-    } else {
-      return of(null as any);
-    }
-  }
-
-  adduser(user: User): Observable<User> {
-    return this.http.post<User>(`${environment.apiUrl}/users`, user, { headers: this.headers }).pipe(
-      catchError(error => {
-        console.error('Error adding user:', error);
-        return of(null as any);
-      })
-    );
-  }
-
-  DeleteUser(user: User): Observable<User> {
-    return this.http.delete<User>(`${environment.apiUrl}/users/${user.id}`, { headers: this.headers }).pipe(
-      catchError(error => {
-        console.error('Error deleting user:', error);
-        return of(null as any);
-      })
-    );
-  }
-
-  updateUser(user: User): Observable<User> {
-    return this.http.patch<User>(`${environment.apiUrl}/users/${user.id}`, user, { headers: this.headers }).pipe(
-      catchError(error => {
-        console.error('Error updating user:', error);
-        return of(null as any);
-      })
-    );
-  }
-
-  updatePassword(user: User): Observable<User> {
-    return this.http.patch<User>(`${environment.apiUrl}/users/${user.id}`, user, { headers: this.headers }).pipe(
-      catchError(error => {
-        console.error('Error updating password:', error);
-        return of(null as any);
-      })
-    );
-  }
 }
