@@ -1,0 +1,79 @@
+@if (!bool) {
+  <div class="container my-5 d-flex justify-content-center">
+    <form
+      class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2"
+      #summaryForm="ngForm"
+      (ngSubmit)="onSubmit(summary)"
+      enctype="multipart/form-data"
+    >
+      <h3 class="text-center fw-bolder my-1 All1">Update summary</h3>
+      <div class="col-10 mx-auto">
+        <label for="Title" class="form-label All2">Title</label>
+        <input
+          type="text"
+          class="form-control All2"
+          id="Title"
+          required
+          name="Title"
+          minlength="3"
+          [value]="summary.title"
+          [(ngModel)]="summary.title"
+          #Titleinput="ngModel"
+          [ngClass]="{
+            'is-invalid':
+              (Titleinput.dirty || Titleinput.touched) && Titleinput.invalid,
+            'is-valid': Titleinput.valid
+          }"
+        />
+        <div class="invalid-feedback All3">
+          @if (Titleinput.errors?.['required'] ) {
+          <span>name is required</span>
+          } @else if (Titleinput.errors?.['minlength'] ) {
+          <span>name most be at least 3 charcters</span>
+          }
+        </div>
+      </div>
+      <div class="col-10 mx-auto">
+        <label for="url" class="form-label All2">url</label>
+        <input
+          type="text"
+          class="form-control All2"
+          id="url"
+          required
+          name="url"
+          [value]="summary.fileUrl"
+          [(ngModel)]="summary.fileUrl"
+          #fileinput="ngModel"
+          [ngClass]="{
+            'is-invalid':
+              (fileinput.dirty || fileinput.touched) && fileinput.invalid,
+            'is-valid': fileinput.valid
+          }"
+        />
+        <div class="invalid-feedback All3">
+          @if (fileinput.errors?.['required'] ) {
+          <span>file is required</span>
+          }
+        </div>
+      </div>
+      <div class="col-10 mx-auto">
+        <button type="submit" class="btn btn-dark All2" [disabled]="summaryForm.invalid">
+          Add summary
+        </button>
+      </div>
+    </form>
+  </div>
+  }
+  @if (bool==true) {
+    <div class="container my-5 d-flex justify-content-center text-bg-success">
+      <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
+      </div>
+  }
+  @if (bool2==true) {
+    <div class="container my-5 d-flex justify-content-center text-bg-danger">
+      <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
+      </div>
+  }
+  <div class="container my-2 my-md-5 d-flex justify-content-center">
+    <button class="btn btn-primary All1" (click)="back()">back</button>
+  </div>

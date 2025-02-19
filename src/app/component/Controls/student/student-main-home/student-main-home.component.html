@@ -1,0 +1,11 @@
+@if (user) {
+  <div class="container w-50 my-5 d-flex flex-column justify-content-center text-bg-primary rounded-5">
+    <h2 class="text-center fw-bolder my-2 All1">Name : {{user.name}}</h2>
+    <h2 class="text-center fw-bolder my-2 All1">UserName : {{user.username}}</h2>
+     <h2 class="text-center fw-bolder my-2 All1">Role : {{user.role}}</h2>
+     @if (studentData ) {
+       <h2 class="text-center fw-bolder my-2 All1">College : {{college.name}}</h2>
+        <h2 class="text-center fw-bolder my-2 All1">Year : {{year.name}}</h2>
+     }
+    </div>
+}

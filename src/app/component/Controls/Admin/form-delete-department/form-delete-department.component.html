@@ -1,0 +1,38 @@
+@if (!bool ) {
+  <div class="container w-50 my-5 d-flex flex-column justify-content-center shadow-lg color">
+  <div class="row w-100 d-flex justify-content-center">
+    <form  class="row w-50 gy-3 gx-0 py-3 rounded-2"
+    #collegeForm="ngForm"
+    (ngSubmit)="selectCollege(id.value)"
+    enctype="multipart/form-data">
+    <h3 class="text-center fw-bolder my-1 All1">Delete Department</h3>
+      <div class="col-10 d-flex justify-content-evenly All2">
+        <label for="College" class="form-label All2" >College </label>
+        <select name="College" id="College" required [(ngModel)]="collegeid" #id>
+          @for (item of colleges; track $index) {
+          <option [value]="item.id">{{ item.name }}</option>
+          }
+        </select>
+        <button type="submit" class="btn btn-dark All2" [disabled]="collegeForm.invalid">
+          Ok
+        </button>
+      </div>
+    </form>
+  </div>
+  @if (select==true) {
+    <div class="row w-100 d-flex justify-content-center">
+      @for (item of departments; track $index) {
+        <div class="col-10 my-2 py-1 text-bg-primary d-flex justify-content-evenly align-items-center">
+          <p class="All2 my-auto">{{item.name}}</p>
+          <button class="btn btn-danger All2" (click)="DeleteDepartment(item)">delete</button>
+        </div>
+      }
+    </div>
+  }
+  </div>
+}
+@if (bool==true) {
+  <div class="container my-5 d-flex justify-content-center text-bg-success">
+    <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
+    </div>
+ }

@@ -1,0 +1,43 @@
+<div class="d-flex flex-column min-vh-100">
+
+  <header style="background-color: #0540F2;" class="text-light Flex py-3 py-sm-2 z-2">
+
+    <div class="col-3 d-flex justify-content-evenly">
+      <a class="d-flex justify-content-between align-items-center p-1 rounded-1 hov "
+      ><img style="width: 2.8vw" [src]="college.imge" alt="photo"
+      />
+      <span class="title All2"> {{college.name}}</span>
+    </a>
+    </div>
+
+    <a href="" class="hov p-1 rounded-1"
+        ><i class="icwn fa-solid fa-house-chimney"></i
+    ></a>
+  </header>
+
+  <div class="container-fluid flex-grow-1 d-flex flex-column align-items-center">
+    <div class="container my-1 d-flex justify-content-center flex-column align-items-center" style="background-color: #BFBFBF;">
+      <h2 class="my-1 py-2 All2">Departments</h2>
+      <div class="container d-flex justify-content-center align-items-center">
+        @for (depart of departments; track depart) {
+          <div class="flex-fill py-3">
+            <button (click)="setDepartment(depart)" style="background-color: #77A0F2;" class="btn text-light w-100 Flex2">
+              {{depart.name}}
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="container w-100 d-flex flex-column flex-md-row-reverse align-items-center align-items-md-stretch justify-content-md-evenly">
+      <app-year class="col-12 col-md-3"></app-year>
+      <app-subject class="col-12 col-md-3"></app-subject>
+      <app-subject-content class="col-12 col-md-3"></app-subject-content>
+      <app-content class="col-12 col-md-3"></app-content>
+    </div>
+  </div>
+
+  <footer style="background-color: #152659;" class="text-light text-center w-100 py-2 mt-auto">
+    <p class="All3" style="opacity:0.4;">Copyright&copy;Your Website 2024</p>
+  </footer>
+</div>

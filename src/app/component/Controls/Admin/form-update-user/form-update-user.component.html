@@ -1,0 +1,12 @@
+<div class="container d-flex justify-content-center">
+  <div class="row w-50 gy-3 gx-0 p-3 mt-5 d-flex align-items-center flex-column shadow-lg color rounded-2">
+    <button class="btn btn-primary w-75 All2" (click)="selectContent('student')">Update student</button>
+    <button class="btn btn-primary w-75 All2" (click)="selectContent('doctor')">Update doctor</button>
+  </div>
+</div>
+@if (content==='student') {
+<app-update-student></app-update-student>
+}
+@if (content==='doctor') {
+ <app-update-doctor></app-update-doctor>
+}

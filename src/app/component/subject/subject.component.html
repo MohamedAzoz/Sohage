@@ -1,0 +1,16 @@
+@if (!isempty()&& subjects!=null) {
+  <div [hidden]="subjects==null" class="bg-danger-subtle d-flex flex-column justify-content-center align-items-center py-4">
+    @if (name!=undefined ) {
+      <div class="col-10 py-2 d-flex justify-content-center">
+        <h3 class="fw-bold text-dark All2">Subjects  {{name}}</h3>
+        </div>
+    }
+    @for (subject of subjects; track subject) {
+      <div class="col-10 py-2">
+        <a (click)="setSubject(subject)" style="background-color: #77A0F2;"
+           class="btn text-light w-100 All2">{{subject.name}}</a>
+      </div>
+        }
+  </div>
+  }
+

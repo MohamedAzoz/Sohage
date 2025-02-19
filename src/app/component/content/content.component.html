@@ -1,0 +1,17 @@
+
+@if (!isempty() && content!=null) {
+  <div [hidden]="content==null" class=" bg-danger-subtle d-flex flex-column justify-content-center align-items-center py-4">
+    @if (name!=undefined ) {
+      <div class="col-10 py-2 d-flex justify-content-center">
+        <h3 class="All2 text-dark">{{name}}</h3>
+        </div>
+    }
+    @for (item of content; track $index) {
+      <div class="col-10 py-2">
+        <a [href]="item.fileUrl" target="_blank" style="background-color: #77A0F2;"
+           class="btn text-light w-100 All2">{{item.title}}</a>
+      </div>
+        }
+  </div>
+  }
+

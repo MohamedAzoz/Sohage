@@ -1,0 +1,98 @@
+
+@if (!bool) {
+  <div class="container my-5 d-flex justify-content-center">
+    <form
+      class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2"
+      #examForm="ngForm"
+      (ngSubmit)="onSubmit()"
+      enctype="multipart/form-data"
+    >
+    @if (message=='error in Add') {
+     <h3 class="text-center fw-bolder my-1 All3">{{message}}</h3>
+    }
+      <h3 class="text-center fw-bolder my-1 All1">Add New College</h3>
+      <div class="col-10 mx-auto">
+        <label for="name" class="form-label All2">Name</label>
+        <input
+          type="text"
+          class="form-control All2"
+          id="name"
+          required
+          name="name"
+          minlength="3"
+          [(ngModel)]="college.name"
+          #Titleinput="ngModel"
+          [ngClass]="{
+            'is-invalid':
+              (Titleinput.dirty || Titleinput.touched) && Titleinput.invalid,
+            'is-valid': Titleinput.valid
+          }"
+        />
+        <div class="invalid-feedback All3">
+          @if (Titleinput.errors?.['required'] ) {
+          <span>name is required</span>
+          } @else if (Titleinput.errors?.['minlength'] ) {
+          <span>name most be at least 3 charcters</span>
+          }
+        </div>
+      </div>
+      <div class="col-10 mx-auto">
+        <label for="description" class="form-label All2">Description</label>
+        <input
+          type="text"
+          class="form-control All2"
+          id="description"
+          required
+          name="description"
+          minlength="3"
+          [(ngModel)]="college.description"
+          #descriptioninput="ngModel"
+          [ngClass]="{
+            'is-invalid':
+              (descriptioninput.dirty || descriptioninput.touched) && descriptioninput.invalid,
+            'is-valid': descriptioninput.valid
+          }"
+        />
+        <div class="invalid-feedback All3">
+          @if (descriptioninput.errors?.['required'] ) {
+          <span>name is required</span>
+          } @else if (descriptioninput.errors?.['minlength'] ) {
+          <span>name most be at least 3 charcters</span>
+          }
+        </div>
+      </div>
+      <div class="col-10 mx-auto">
+        <label for="file" class="form-label All2">Imge</label>
+        <input
+          type="text"
+          class="form-control All2"
+          id="file"
+          required
+          name="file"
+          [(ngModel)]="college.imge"
+          #fileinput="ngModel"
+          [ngClass]="{
+            'is-invalid':
+              (fileinput.dirty || fileinput.touched) && fileinput.invalid,
+            'is-valid': fileinput.valid
+          }"
+        />
+        <div class="invalid-feedback All3">
+          @if (fileinput.errors?.['required'] ) {
+          <span>file is required</span>
+          }
+        </div>
+      </div>
+      <div class="col-10 mx-auto">
+        <button type="submit" class="btn btn-dark All2" [disabled]="examForm.invalid">
+         Add
+        </button>
+      </div>
+    </form>
+  </div>
+}
+@if (bool==true) {
+  <div class="container my-5 d-flex justify-content-center text-bg-success">
+    <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
+    </div>
+ }

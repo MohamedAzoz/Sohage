@@ -1,0 +1,106 @@
+@if (!bool ) {
+  <div class="container my-5 d-flex justify-content-center">
+    <form
+      class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2"
+      #testForm="ngForm"
+      (ngSubmit)="onSubmit(test)"
+      enctype="multipart/form-data"
+    >
+      <h3 class="text-center fw-bolder my-1 All1">Add New Test</h3>
+      <div class="col-10 mx-auto">
+        <label for="Title" class="form-label All2">Title</label>
+        <input
+          type="text"
+          class="form-control All2"
+          id="Title"
+          required
+          placeholder="lecture 1"
+          name="Title"
+          minlength="3"
+            [(ngModel)]="test.title"
+          #Titleinput="ngModel"
+          [ngClass]="{
+            'is-invalid':
+              (Titleinput.dirty || Titleinput.touched) && Titleinput.invalid,
+            'is-valid': Titleinput.valid
+          }"
+        />
+        <div class="invalid-feedback All3">
+          @if (Titleinput.errors?.['required'] ) {
+          <span>name is required</span>
+          } @else if (Titleinput.errors?.['minlength'] ) {
+          <span>name most be at least 3 charcters</span>
+          }
+        </div>
+      </div>
+        <div class="col-10 mx-auto All2">
+            <label for="subject" class="form-label All2">subject </label>
+            <select name="subject" id="subject" required [(ngModel)]="test.subjectId">
+              @for (item of subjects; track $index) {
+              <option [value]="item.id">{{ item.name }}</option>
+              }
+            </select>
+        </div>
+      <div class="col-10 mx-auto">
+        <label for="url" class="form-label All2">url</label>
+        <input
+          type="text"
+          class="form-control All2"
+          id="url"
+          required
+          name="url"
+          [(ngModel)]="test.fileUrl"
+          #fileinput="ngModel"
+          [ngClass]="{
+            'is-invalid':
+              (fileinput.dirty || fileinput.touched) && fileinput.invalid,
+            'is-valid': fileinput.valid
+          }"
+        />
+        <div class="invalid-feedback All3">
+          @if (fileinput.errors?.['required'] ) {
+          <span>file is required</span>
+          }
+        </div>
+      </div>
+      <div class="col-10 mx-auto">
+        <label for="year" class="form-label All2">year</label>
+        <input
+          type="number"
+          class="form-control All2"
+          id="year"
+          placeholder="2025"
+          required
+          name="year"
+          [(ngModel)]="test.year"
+          minlength="4"
+          #yearinput="ngModel"
+          [ngClass]="{
+            'is-invalid':
+              (yearinput.dirty || yearinput.touched) &&
+              yearinput.invalid,
+            'is-valid': yearinput.valid
+          }"
+        />
+        <div class="invalid-feedback All3">
+          @if (yearinput.errors?.['required'] ) {
+          <span>year is required</span>
+          } @else if (yearinput.errors?.['minlength'] ) {
+          <span>year most be at least 4 charcters</span>
+          }
+        </div>
+      </div>
+      <div class="col-10 mx-auto">
+        <button type="submit" class="btn btn-dark All2" [disabled]="testForm.invalid">
+          Add Test
+        </button>
+      </div>
+    </form>
+  </div>
+  }
+  @if (bool==true) {
+    <div class="container my-5 d-flex justify-content-center text-bg-success">
+      <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
+      </div>
+   }
+

@@ -1,1 +1,120 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+* {
+    font-family: "Cairo", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "slnt" 0;
+}
+a {
+    text-decoration: none;
+}
+
+.icwn {
+  font-size: 2.5vw;color: white;
+}
+.wid{
+    width: 2.2vw;
+}
+
+.d {
+    display: none;
+}
+.ic{
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+.icsh{
+    opacity: 1;
+}
+
+.All {
+  font-size: 1.5vw;
+  font-weight: bold;
+}
+
+.All2 {
+  font-size: 1.5vw;
+  font-weight: bolder;
+}
+
+.All3 {
+  font-size: 1vw;
+  font-weight: bolder;
+}
+
+.All1 {
+  font-size: 1.7vw;
+  font-weight: bold;
+}
+
+
+@media (max-width:600px) and (max-height:950px) {
+    .All {
+        font-size: 2vw;
+        font-weight: bolder;
+    }
+
+    .All2 {
+        font-size: 1.5vw;
+        font-weight: bolder;
+    }
+
+    .All3 {
+        font-size: 1vw;
+        font-weight: bolder;
+    }
+
+    .All1 {
+        font-size: 1.7vw;
+        font-weight: bold;
+    }
+
+
+}
+
+ @media (min-width:601px) and (min-height:951px) {
+    .All {
+        font-size: 1.5vw;
+        font-weight: bold;
+    }
+
+    .All2 {
+        font-size: 1.5vw;
+        font-weight: bolder;
+    }
+
+    .All3 {
+        font-size: 1vw;
+        font-weight: bolder;
+    }
+
+    .All1 {
+        font-size: 1.7vw;
+        font-weight: bold;
+    }
+
+}
+
+@media (min-width:951px) and (max-height:950px) {
+    .All {
+        font-size: 1.5vw;
+        font-weight: bold;
+    }
+
+    .All2 {
+        font-size: 1.5vw;
+        font-weight: bolder;
+    }
+
+    .All3 {
+        font-size: 1vw;
+        font-weight: bolder;
+    }
+
+    .All1 {
+        font-size: 1.7vw;
+        font-weight: bold;
+    }
+
+}

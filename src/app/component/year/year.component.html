@@ -1,0 +1,15 @@
+@if (years ) {
+  <div class="bg-body-secondary d-flex flex-column justify-content-center align-items-center py-4">
+    @if (name!=undefined ) {
+      <div class="col-10 py-2 d-flex justify-content-center">
+        <h3 class="fw-bold text-dark All2">year {{name}}</h3>
+        </div>
+    }@for (year of years; track $index) {
+      <div class="col-10 py-2">
+        <a  (click)="setData(year)" style="background-color: #77A0F2;"
+           class="btn text-light w-100 All2">{{year.name}}</a>
+      </div>
+        }
+  </div>
+  }
+

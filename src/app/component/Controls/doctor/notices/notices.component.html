@@ -1,0 +1,25 @@
+<div class="container w-75 my-5 d-flex flex-column justify-content-center">
+  <div class="w-100 p-2 my-1 d-flex justify-content-between align-items-center shadow-sm color border border-2">
+    <span class="All1">Student</span>
+    <span class="All1">College</span>
+    <span class="All1">Year</span>
+    <span class="All1">Subject</span>
+    <span class="All1">Type</span>
+    <span class="All1">Time</span>
+    <span class="All1">Show</span>
+    <span class="All1">Delete</span>
+
+  </div>@for (time of notification; track $index){
+  <div class="w-100 p-2 my-1 d-flex justify-content-between align-items-center shadow-sm color border border-2">
+    <span class="All1">{{time.StudentName}}</span>
+    <span class="All1">{{time.StudentCollege}}</span>
+    <span class="All1">{{time.StudentYear}}</span>
+    <span class="All1">{{time.subjectName}}</span>
+    <span class="All1">{{time.type}}</span>
+    <span class="All1">{{time.time| date:'short'}}</span>
+    <a class="btn btn-outline-primary  All1" [href]="time.URL_Content" target="_blank">show</a>
+    <button class="btn btn-outline-dark  All1" (click)="delete(time)"><i class="fa-solid fa-trash"></i></button>
+  </div>
+}
+</div>
+

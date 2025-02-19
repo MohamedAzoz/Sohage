@@ -1,0 +1,211 @@
+<nav id="nav" class="navbar navbar-expand w-100 py-2 py-sm-1">
+  <div class="container-fluid w-100 row">
+    <ul
+      class="navbar-nav nav-pills row d-flex align-items-center justify-content-center"
+    >
+    @if (islook==false) {
+      <div class="col-3 d-sm-flex d-none">
+        <li
+          class="nav-item col-12 d-flex justify-content-end"
+        >
+          <a routerLink="" class="d-flex justify-content-between align-items-center nav-link hov"
+          ><img style="width: 2.8vw" src="372897.svg" alt="photo"
+          />
+          <span class="All title">Sohage University</span>
+        </a>
+      </li>
+    </div>
+  }
+  @if (islook==true && name!='') {
+    <div class="col-2 d-flex">
+     <li
+       class="nav-item  col-12 d-flex justify-content-end"
+     >
+     <!-- @if (isAdmin==true && role=='admin') {
+       <a routerLink="admin" class="All text-light d-flex justify-content-end nav-link hov">{{admin}}</a>
+     }
+     @if (isDoctor==true && role) { -->
+       <a [routerLink]="role" class="All text-light d-flex justify-content-end nav-link hov">{{name}}</a>
+     <!-- }
+     @if (isStudent==true && student) {
+       <a routerLink="studenthome" class="All text-light d-flex justify-content-end nav-link hov">{{student}}</a>
+     } -->
+   </li>
+   </div>
+  }
+      @if (islook==false) {
+      <div class="col-10 col-sm-7 d-flex justify-content-center">
+          <li class="nav-item col-2 d-flex justify-content-end">
+            <a href="#top" class="All nav-link hov"
+              ><i class="icwn fa-solid fa-house-chimney"></i
+            ></a>
+          </li>
+          <li class="nav-item col-2 d-flex justify-content-end">
+            <div class="dropdown">
+              <a
+                href="#college"
+                class="btn dropdown-toggle All nav-link text-light hov"
+
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                الكليات
+              </a>
+              <ul class="dropdown-menu bg-primary-subtle">
+                <div class="btn-toolbar col-12 ">
+                  <div class="btn-group d-flex flex-column">
+                    @for (college of colleges; track $index) {
+                      <li class="list-group-item">
+                        <a
+                        class="dropdown-item All3"
+                        target="_blank"
+                        [routerLink]="['/college/',college.id]"
+                        >{{college.name}}</a
+                        >
+                      </li>
+
+                    }
+                    </div>
+                </div>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item col-2 d-flex justify-content-end">
+            <a
+              href="#Al"
+              class="All nav-link text-light hov"
+
+              >الدورات</a
+            >
+          </li>
+          <li class="nav-item col-2 d-flex justify-content-end">
+            <a
+              href="#media"
+              class="All nav-link text-light hov"
+
+              >media</a
+            >
+          </li>
+          <li class="nav-item col-2 d-flex justify-content-end">
+            <a
+              routerLink="/login"
+              class="All nav-link text-light hov"
+              >Login</a
+            >
+          </li>
+
+        </div>
+      }
+      @if (islook==true) {
+      <div class="col-10 d-flex justify-content-center">
+      @if (isAdmin==true) {
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a routerLink="admin" routerLinkActive="active" class="All text-light nav-link hov"
+            ><i class="icwn fa-solid fa-house-chimney"></i
+          ></a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a class="All text-light nav-link hov"
+          routerLink="addManager" routerLinkActive="active">Add Manager</a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a class="All text-light nav-link hov"
+          routerLink="updateManager" routerLinkActive="active">Update Manager</a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a class="All text-light nav-link hov"
+          routerLink="deleteManager" routerLinkActive="active">Delete Manager</a>
+        </li>
+      }
+      @else if (isDoctor==true) {
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a [routerLink]="['doctor']" routerLinkActive="active" class="All text-light nav-link hov"
+            ><i class="icwn fa-solid fa-house-chimney"></i
+          ></a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a class="All text-light nav-link hov"
+          [routerLink]="['updatedoctor']" routerLinkActive="active">Update Manager</a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a class="All text-light nav-link hov"
+          [routerLink]="['deletedoctor']" routerLinkActive="active">Delete Manager</a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-center">
+          <a
+            class="All text-light nav-link hov"
+            [routerLink]="['notices']" routerLinkActive="active">Notices</a>
+        </li>
+      }
+      @else if (isStudent==true) {
+        <li class="nav-item col-1 d-flex justify-content-end">
+          <a routerLink="student" routerLinkActive="active" class="All text-light nav-link hov"
+            ><i class="icwn fa-solid fa-house-chimney"></i
+          ></a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a class="All text-light nav-link hov"
+          routerLink="summarymanager/" routerLinkActive="active">إدارة الملخصات</a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a class="All text-light nav-link hov"
+          routerLink="reviewmanager" routerLinkActive="active">إدارة المراجعات</a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a class="All text-light nav-link hov"
+          routerLink="testmanager" routerLinkActive="active">إدارة الاختبارات</a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a
+            class="All text-light nav-link hov"
+            routerLink="exammanager" routerLinkActive="active">إدارة الامتحانات</a>
+        </li>
+      }
+
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a
+            class="All text-light nav-link hov"
+            routerLink="/updateYourData">update password</a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a
+          routerLink="/login"
+            class="All text-light nav-link hov"
+             (click)="Logout()">Logout</a>
+        </li>
+      </div>
+    }
+    @if (islook==false) {
+
+      <div class="dropdown All col-2 d-flex justify-content-center hov">
+        <button
+          class="All btn dropdown-toggle w-75 text-light"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            style="width: 2vw"
+            class="me-1"
+            src="egegyptflag_111647.png"
+            alt="اللغة العربية"
+          />Ar
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <button class="dropdown-item All hov" (click)="refresh()"
+              ><img
+                style="width: 2vw"
+                src="egegyptflag_111647.png"
+                alt="اللغة العربية"
+              />
+              Ar</button
+            >
+          </li>
+        </ul>
+      </div>
+    }
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,21 @@
+<div class="container w-50 py-2 my-3 d-flex justify-content-evenly align-items-center shadow-lg color">
+    <button class="btn btn-danger All2" (click)="selecteRole('student')">student</button>
+    <button class="btn btn-danger All2" (click)="selecteRole('doctor')">doctor</button>
+</div>
+@if (bool1==true) {
+  <div class="container w-50 my-5 d-flex flex-column justify-content-center align-items-center shadow-lg color">
+   @for (user of users; track $index) {
+    <div class="col-10 my-2 py-1 text-bg-primary d-flex justify-content-evenly align-items-center">
+      <p class="All1 my-auto">{{user.username}}</p>
+      <p class="All1 my-auto">{{user.name}}</p>
+      <p class="All1 my-auto">{{user.role}}</p>
+      <button class="btn btn-danger All2" (click)="DeleteUser(user)">delete</button>
+    </div>
+  }
+  </div>
+  }
+  @if (bool2==true) {
+    <div class="container my-5 d-flex justify-content-center text-bg-success">
+      <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
+      </div>
+   }

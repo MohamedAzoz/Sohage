@@ -1,0 +1,208 @@
+<!-- <div class="container my-5 d-flex justify-content-center">
+  <form
+    class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2"
+    #examForm="ngForm"
+    (ngSubmit)="onSubmit(examForm)"
+    enctype="multipart/form-data"
+  >
+    <h3 class="text-center fw-bolder my-1">Add New Exam</h3>
+    <div class="col-10 mx-auto">
+      <label for="Title" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Title"
+        required
+        placeholder="lecture 1"
+        name="name"
+        minlength="3"
+        [(ngModel)]="exam.title"
+        #Titleinput="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (Titleinput.dirty || Titleinput.touched) && Titleinput.invalid,
+          'is-valid': Titleinput.valid
+        }"
+      />
+      <div class="invalid-feedback">
+        @if (Titleinput.errors?.['required'] ) {
+        <span>name is required</span>
+        } @else if (Titleinput.errors?.['minlength'] ) {
+        <span>name most be at least 3 charcters</span>
+        }
+      </div>
+    </div>
+    <div class="col-10 mx-auto">
+      <label for="subject" class="form-label">subject </label>
+      <select name="subject" id="subject" required [(ngModel)]="exam.subjectId">
+        @for (item of subjects; track $index) {
+        <option [value]="item.id">{{ item.name }}</option>
+        }
+      </select>
+    </div>
+    <div class="col-10 mx-auto">
+      <label for="file" class="form-label">file</label>
+      <input
+        type="file"
+        class="form-control"
+        id="file"
+        required
+        name="file"
+        (change)="onFileSelect($event)"
+        [(ngModel)]="selectFile"
+        #fileinput="ngModel"
+        accept=".pdf , .docx"
+        [ngClass]="{
+          'is-invalid':
+            (fileinput.dirty || fileinput.touched) && fileinput.invalid,
+          'is-valid': fileinput.valid
+        }"
+      />
+      <div class="invalid-feedback">
+        @if (fileinput.errors?.['required'] ) {
+        <span>file is required</span>
+        } @else if (fileinput.errors?.['accept'] ) {
+        <span>file .pdf or .docx</span>
+        }
+      </div>
+    </div>
+    <div class="col-10 mx-auto">
+      <label for="inputAddress" class="form-label">year</label>
+      <input
+        type="number"
+        class="form-control"
+        id="inputAddress"
+        placeholder="2025"
+        required
+        name="address"
+        [(ngModel)]="exam.year"
+        minlength="4"
+        #addressinput="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (addressinput.dirty || addressinput.touched) &&
+            addressinput.invalid,
+          'is-valid': addressinput.valid
+        }"
+      />
+      <div class="invalid-feedback">
+        @if (addressinput.errors?.['required'] ) {
+        <span>address is required</span>
+        } @else if (addressinput.errors?.['minlength'] ) {
+        <span>address most be at least 4 charcters</span>
+        }
+      </div>
+    </div>
+    <div class="col-10 mx-auto">
+      <button type="submit" class="btn btn-dark" [disabled]="examForm.invalid">
+        Sign in
+      </button>
+    </div>
+  </form>
+</div> -->
+@if (!bool ) {
+<div class="container my-5 d-flex justify-content-center">
+  <form
+    class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2"
+    #examForm="ngForm"
+    (ngSubmit)="onSubmit(exam)"
+    enctype="multipart/form-data"
+  >
+    <h3 class="text-center fw-bolder my-1 All1">Add New Exam</h3>
+    <div class="col-10 mx-auto">
+      <label for="Title" class="form-label All2">Title</label>
+      <input
+        type="text"
+        class="form-control All2"
+        id="Title"
+        required
+        placeholder="lecture 1"
+        name="Title"
+        minlength="3"
+          [(ngModel)]="exam.title"
+        #Titleinput="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (Titleinput.dirty || Titleinput.touched) && Titleinput.invalid,
+          'is-valid': Titleinput.valid
+        }"
+      />
+      <div class="invalid-feedback All3">
+        @if (Titleinput.errors?.['required'] ) {
+        <span>name is required</span>
+        } @else if (Titleinput.errors?.['minlength'] ) {
+        <span>name most be at least 3 charcters</span>
+        }
+      </div>
+    </div>
+      <div class="col-10 mx-auto All2">
+          <label for="subject" class="form-label All2">subject </label>
+          <select name="subject" id="subject" required [(ngModel)]="exam.subjectId">
+            @for (item of subjects; track $index) {
+            <option [value]="item.id">{{ item.name }}</option>
+            }
+          </select>
+      </div>
+    <div class="col-10 mx-auto">
+      <label for="url" class="form-label All2">url</label>
+      <input
+        type="text"
+        class="form-control All2"
+        id="url"
+        required
+        name="url"
+        [(ngModel)]="exam.fileUrl"
+        #fileinput="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (fileinput.dirty || fileinput.touched) && fileinput.invalid,
+          'is-valid': fileinput.valid
+        }"
+      />
+      <div class="invalid-feedback All3">
+        @if (fileinput.errors?.['required'] ) {
+        <span>file is required</span>
+        }
+      </div>
+    </div>
+    <div class="col-10 mx-auto">
+      <label for="year" class="form-label All2">year</label>
+      <input
+        type="number"
+        class="form-control All2"
+        id="year"
+        placeholder="2025"
+        required
+        name="year"
+        [(ngModel)]="exam.year"
+        minlength="4"
+        #yearinput="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (yearinput.dirty || yearinput.touched) &&
+            yearinput.invalid,
+          'is-valid': yearinput.valid
+        }"
+      />
+      <div class="invalid-feedback All3">
+        @if (yearinput.errors?.['required'] ) {
+        <span>year is required</span>
+        } @else if (yearinput.errors?.['minlength'] ) {
+        <span>year most be at least 4 charcters</span>
+        }
+      </div>
+    </div>
+    <div class="col-10 mx-auto">
+      <button type="submit" class="btn btn-dark All2" [disabled]="examForm.invalid">
+        Add Exam
+      </button>
+    </div>
+  </form>
+</div>
+}
+@if (bool==true) {
+  <div class="container my-5 d-flex justify-content-center text-bg-success">
+    <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
+    </div>
+ }
+

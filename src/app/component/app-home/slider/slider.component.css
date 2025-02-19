@@ -1,0 +1,41 @@
+#section {
+  display: grid;
+  place-items: center;
+}
+.slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #E3F2FD;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.4px);
+  -webkit-backdrop-filter: blur(7.4px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.slider-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: scrolling 20s linear infinite alternate;
+  background-color: #E3F2FD;
+}
+
+@keyframes scrolling {
+
+  0% {
+      transform: translateX(30%);
+  }
+
+  100% {
+      transform: translateX(-30%);
+  }
+}
+
+.slider-items div {
+  width: 5%;
+}
+.slider-items div a img{
+  width: 100%;
+}

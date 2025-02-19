@@ -1,0 +1,219 @@
+@if (!select) {
+  <div class="container w-50 my-3 d-flex flex-column justify-content-center shadow-lg color">
+        <div class="row w-100 d-flex justify-content-center">
+          <form  class="row w-50 gy-3 gx-0 py-3 rounded-2"
+          #collegeForm="ngForm"
+          (ngSubmit)="selectCollege(idcollege.value)"
+          enctype="multipart/form-data">
+          <h3 class="text-center fw-bolder my-1">select College</h3>
+
+            <div class="col-10 d-flex justify-content-evenly">
+              <label for="College" class="form-label" >College </label>
+              <select name="College" id="College" required [(ngModel)]="studentData.collegeId" #idcollege>
+                @for (item of colleges; track $index) {
+                <option [value]="item.id">{{ item.name }}</option>
+                }
+              </select>
+              <button type="submit" class="btn btn-dark" [disabled]="collegeForm.invalid">
+                Ok
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="row w-100 d-flex justify-content-center">
+          <form
+            class="row w-50 gy-3 gx-0 py-3 rounded-2"
+            #DepartmentForm="ngForm"
+            (ngSubmit)="selectDepartment(idDept.value)"
+            enctype="multipart/form-data"
+          >
+            <div class="col-10 d-flex justify-content-evenly">
+              <label for="department" class="form-label">Department </label>
+              <select name="department" id="department" required [(ngModel)]="Departmentid" #idDept>
+                @for (item of departments; track $index) {
+                  <option [value]="item.id">{{ item.name }}</option>
+                }
+              </select>
+              <button type="submit" class="btn btn-dark" [disabled]="DepartmentForm.invalid">
+                Ok
+              </button>
+            </div>
+          </form>
+        </div>
+      <div class="row w-100 d-flex justify-content-center">
+        <form  class="row w-50 gy-3 gx-0 py-3 rounded-2"
+        #yearForm="ngForm"
+        (ngSubmit)="selectYear(idyear.value)"
+        enctype="multipart/form-data">
+          <div class="col-10 d-flex justify-content-evenly">
+            <label for="College" class="form-label" >Year </label>
+            <select name="College" id="College" required [(ngModel)]="studentData.yearId" #idyear>
+              @for (item of years; track $index) {
+              <option [value]="item.id">{{ item.name }}</option>
+              }
+            </select>
+            <button type="submit" class="btn btn-dark" [disabled]="yearForm.invalid">
+              Ok
+            </button>
+          </div>
+        </form>
+      </div>
+</div>
+}
+
+@if (!bool && select==true) {
+  <div class="container w-50 my-3 d-flex flex-column justify-content-center shadow-lg color">
+    <h3 class="text-center fw-bolder mt-3 All1">Add New student</h3>
+    <div class="row w-100 d-flex justify-content-center">
+    <form  class="row w-50 gy-3 gx-0 py-3 rounded-2"
+    #collegeForm="ngForm"
+    (ngSubmit)="selectCollege(id.value)"
+    enctype="multipart/form-data">
+      <div class="col-10 d-flex justify-content-evenly">
+        <label for="College" class="form-label All2" >College </label>
+        <select name="College" id="College" required [(ngModel)]="studentData.collegeId" #id>
+          @for (item of colleges; track $index) {
+          <option [value]="item.id">{{ item.name }}</option>
+          }
+        </select>
+        <button type="submit" class="btn btn-dark All2" [disabled]="collegeForm.invalid">
+          Ok
+        </button>
+      </div>
+    </form>
+  </div>
+    <div class="row w-100 d-flex justify-content-center">
+
+    <form  class="row w-50 gy-3 gx-0 py-3 rounded-2"
+    #departForm="ngForm"
+    (ngSubmit)="selectDepartment(id2.value)"
+    enctype="multipart/form-data">
+      <div class="col-10 d-flex justify-content-evenly">
+        <label for="Department" class="form-label All2" >Department </label>
+        <select name="Department" id="Department" [value]="Departmentid" required [(ngModel)]="Departmentid" #id2>
+          @for (item of departments; track $index) {
+          <option [value]="item.id">{{ item.name }}</option>
+          }
+        </select>
+         <button type="submit" class="btn btn-dark All2" [disabled]="departForm.invalid">
+          Ok
+        </button>
+      </div>
+    </form>
+  </div>
+    <div class="row w-100 d-flex justify-content-center">
+      <form
+        class="row w-50 gy-3 gx-0 py-3 rounded-2"
+        #examForm="ngForm"
+        (ngSubmit)="onSubmit(user)"
+        enctype="multipart/form-data"
+      >
+      @if (message=='error in Add') {
+       <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
+      }
+        <div class="col-10 mx-auto">
+          <label for="Year" class="form-label All2">Year </label>
+          <select name="Year" id="Year" required [(ngModel)]="studentData.yearId">
+            @for (item of years; track $index) {
+            <option [value]="item.id">{{ item.name }}</option>
+            }
+          </select>
+        </div>
+            <div class="col-10 mx-auto">
+              <label for="name" class="form-label All2">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                required
+                name="name"
+                minlength="3"
+                [(ngModel)]="user.name"
+                #Titleinput="ngModel"
+                [ngClass]="{
+                  'is-invalid':
+                    (Titleinput.dirty || Titleinput.touched) && Titleinput.invalid,
+                  'is-valid': Titleinput.valid
+                }"
+              />
+              <div class="invalid-feedback All3">
+                @if (Titleinput.errors?.['required'] ) {
+                <span>name is required</span>
+                } @else if (Titleinput.errors?.['minlength'] ) {
+                <span>name most be at least 3 charcters</span>
+                }
+              </div>
+            </div>
+            <div class="col-10 mx-auto">
+              <label for="inputEmail4" class="form-label All2">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputEmail4"
+                required
+                name="username"
+                [(ngModel)]="user.username"
+                #usernameinput="ngModel"
+                pattern="^\d{13}$"
+                [ngClass]="{'is-invalid': (usernameinput.dirty || usernameinput.touched)&& usernameinput.invalid,
+                  'is-valid':usernameinput.valid
+                }"
+              />
+              <div class="invalid-feedback All3">
+                @if (usernameinput.errors?.['required'] ) {
+                  <span>username is required</span>
+                }
+                @else if (usernameinput.errors?.['pattern'] ) {
+                  <span>username most be contain numbers</span>
+                }
+              </div>
+            </div>
+            <div class="col-10 mx-auto">
+              <label for="inputPassword4" class="form-label All2">Password</label>
+              <div class="input-group flex-nowrap">
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  class="form-control"
+                  id="inputPassword4"
+                  required
+                  aria-label="Password"
+                  aria-describedby="addon-wrapping"
+                  name="password"
+                  [(ngModel)]="user.password"
+                  #passwordinput="ngModel"
+                  minlength="6"
+                  pattern="^([a-zA-Z]+|\d+|(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@.]).{6,})$"
+                  [ngClass]="{
+                    'is-invalid': (passwordinput.dirty || passwordinput.touched) && passwordinput.invalid,
+                    'is-valid': passwordinput.valid
+                  }"
+                />
+                <span class="All2 input-group-text" id="addon-wrapping" (click)="togglePassword()" style="cursor: pointer;">
+                  <i [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword" class="fa-solid"></i>
+                </span>
+              </div>
+            </div>
+              <div class="invalid-feedback All3">
+                @if (passwordinput.errors?.['required'] ) {
+                  <span>password is required</span>
+                } @else if (passwordinput.errors?.['minlength'] ) {
+                  <span>password most be at least 6 charcters</span>
+                }
+                @else if (passwordinput.errors?.['pattern'] ) {
+                  <span>password most be at least one small and one captail charcters and numbers</span>
+                }
+              </div>
+            <div class="col-10 mx-auto">
+              <button type="submit" class="btn btn-dark All2" [disabled]="examForm.invalid">
+               Update
+              </button>
+            </div>
+      </form>
+    </div>
+  </div>
+}
+@if (bool==true) {
+  <div class="container my-5 d-flex justify-content-center text-bg-success">
+  <h3 class="text-center fw-bolder my-1  All2">{{message}}</h3>
+  </div>
+ }

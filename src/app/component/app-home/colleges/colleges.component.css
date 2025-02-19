@@ -1,0 +1,15 @@
+.color {
+  border:0.7vw solid #003366;
+  border-radius: 15px;
+  box-sizing: border-box;
+  & p{color: #D3D3D3;}
+  &:hover {
+      transition: background-color box-shadow 0.7s;
+      box-shadow: 1px 0px 4px 4px rgba(17, 17, 17, 0.521);
+      background-color: #E0F2F1;
+      p{
+          color: #000;
+          font-weight: bold;
+      }
+  }
+}

@@ -1,0 +1,28 @@
+<section id="college" class="container-fluid d-flex flex-wrap">
+  @for (data of colleges; track data) {
+  <div
+  class="col-11 col-sm-3 color py-3 py-sm-1 my-2 mx-sm-4 my-sm-2 mx-md-4 my-md-3 mx-xl-5 my-xl-3 All"
+  data-bs-toggle="tooltip"
+  data-bs-placement="top"
+  data-bs-custom-class="custom-tooltip"
+  [attr.data-bs-title]="data.description"
+  >
+  <a
+    [routerLink]="['/college/',data.id]"
+    target="_blank"
+    class="col-12 d-flex flex-column align-items-center justify-content-center"
+  >
+    <img
+      class="col-4 col-sm-6 mx-auto d-block"
+      [src]="data.imge"
+      alt="{{data.name}}"
+    />
+    <p
+      class="All1 d-none row d-sm-flex justify-content-center align-items-center"
+    >
+      {{data.name}}
+    </p>
+  </a>
+  </div>
+  }
+</section>

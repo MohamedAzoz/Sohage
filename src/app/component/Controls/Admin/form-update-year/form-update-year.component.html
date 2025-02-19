@@ -1,0 +1,112 @@
+@if (!bool) {
+  <div class="container w-50 my-5 d-flex flex-column justify-content-center shadow-lg color">
+        <div class="row w-100 d-flex justify-content-center">
+          <form  class="row w-50 gy-3 gx-0 py-3 rounded-2"
+          #collegeForm="ngForm"
+          (ngSubmit)="selectCollege(idcollege.value)"
+          enctype="multipart/form-data">
+            <div class="col-10 d-flex justify-content-evenly">
+              <label for="College" class="form-label All2" >College </label>
+              <select name="College" id="College" required [(ngModel)]="collegeid" #idcollege>
+                @for (item of colleges; track $index) {
+                <option [value]="item.id">{{ item.name }}</option>
+                }
+              </select>
+              <button type="submit" class="btn btn-dark All2" [disabled]="collegeForm.invalid">
+                Ok
+              </button>
+            </div>
+          </form>
+        </div>
+      @if (select==true) {
+        <div class="row w-100 d-flex justify-content-center">
+          <form
+            class="row w-50 gy-3 gx-0 py-3 rounded-2"
+            #DepartmentForm="ngForm"
+            (ngSubmit)="selectDepartment(idDept.value)"
+            enctype="multipart/form-data"
+          >
+            <div class="col-10 d-flex justify-content-evenly All2">
+              <label for="department" class="form-label All2">Department </label>
+              <select name="department" id="department" required [(ngModel)]="Departid" #idDept>
+                @for (item of departments; track $index) {
+                <option [value]="item.id">{{ item.name }}</option>
+                }
+              </select>
+              <button type="submit" class="btn btn-dark All2" [disabled]="DepartmentForm.invalid">
+                ok
+              </button>
+            </div>
+          </form>
+        </div>
+      }
+      @if (select2==true) {
+      <div class="row w-100 d-flex justify-content-center">
+        <form  class="row w-50 gy-3 gx-0 py-3 rounded-2"
+        #yearForm="ngForm"
+        (ngSubmit)="selectYear(idyear.value)"
+        enctype="multipart/form-data">
+          <div class="col-10 d-flex justify-content-evenly All2">
+            <label for="College" class="form-label All2" >Year </label>
+            <select name="College" id="College" required [(ngModel)]="Yearid" #idyear>
+              @for (item of years; track $index) {
+              <option [value]="item.id">{{ item.name }}</option>
+              }
+            </select>
+            <button type="submit" class="btn btn-dark All2" [disabled]="yearForm.invalid">
+              update
+            </button>
+          </div>
+        </form>
+      </div>
+      }
+      @if (select3==true) {
+        <div class="row w-100 d-flex justify-content-center">
+          <form
+            class="row w-50 gy-3 gx-0 py-3 rounded-2"
+            #updatForm="ngForm"
+            (ngSubmit)="onSubmit(year)"
+            enctype="multipart/form-data"
+          >
+        <div class="col-10 d-flex justify-content-evenly">
+          <label for="name" class="form-label All2">Name</label>
+          <input
+            type="text"
+            class="form-control All2"
+            id="name"
+            required
+            name="name"
+            minlength="2"
+            [value]="year.name"
+            [(ngModel)]="year.name"
+            #Titleinput="ngModel"
+            [ngClass]="{
+              'is-invalid':
+                (Titleinput.dirty || Titleinput.touched) && Titleinput.invalid,
+              'is-valid': Titleinput.valid
+            }"
+          />
+          <div class="invalid-feedback All3">
+            @if (Titleinput.errors?.['required'] ) {
+            <span>name is required</span>
+            } @else if (Titleinput.errors?.['minlength'] ) {
+            <span>name most be at least 2 charcters</span>
+            }
+          </div>
+        </div>
+        <div class="col-10 mx-auto">
+          <button type="submit" class="btn btn-dark All2" [disabled]="updatForm.invalid">
+            Update
+          </button>
+        </div>
+      </form>
+      </div>
+      }
+</div>
+
+}
+@if (bool==true) {
+  <div class="container my-5 d-flex justify-content-center text-bg-success">
+    <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
+    </div>
+ }

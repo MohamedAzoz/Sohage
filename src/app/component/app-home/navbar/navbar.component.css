@@ -1,0 +1,17 @@
+#nav {
+  top: 0px;
+  position: sticky;
+  z-index: 10;
+  background-color: #003366;
+}
+
+.hov:hover{
+  background-color: #D4AF37 !important;
+  font-weight: bold ;
+}
+.title{
+  color: white;
+  text-shadow: 2px 2px 4px red;
+}
+
+

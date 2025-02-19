@@ -1,0 +1,19 @@
+<section id="section" class="mt-3 mt-md-5">
+  <h3 id="Al" class="All1 font2">جهات تقدم دورات مهنية</h3>
+    <div
+    class="slider w-100 mt-3 mt-md-4 py-1"
+  >
+  <div class="slider-items z-3 w-100 d-flex justify-content-evenly align-items-center">
+    @for (slider of sliders; track $index) {
+    <div>
+      <a [href]="slider.url" target="_blank">
+        <img
+          [src]="slider.imge"
+          [alt]="slider.name"
+        />
+      </a>
+    </div>
+  }
+</div>
+  </div>
+  </section>
