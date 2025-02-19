@@ -1,10 +1,8 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { isPlatformBrowser } from '@angular/common';
-import { environment } from '../../environments/environment.development';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { College } from '../models/college';
+import { environment } from '../../environments/environment.development';
 import { Department } from '../models/department';
 import { Year } from '../models/year';
 
@@ -12,146 +10,79 @@ import { Year } from '../models/year';
   providedIn: 'root'
 })
 export class CollegeServiceService {
-  private header = {
-    headers: new HttpHeaders({
-      "Content-Type": "application/json"
-      ,'X-Master-Key':'$2a$10$8rkCpTdmdUdcXafaJZuWreEaLYhlfRHBLZiSZ2J3Ri3rCA99EhDKy'
-    })
-  };
-
-  private department = new BehaviorSubject<Department | null>(null);
-  currentDepartment: Observable<Department | null> = this.department.asObservable();
-
+  header={}
+ private department=new BehaviorSubject<Department|null>(null);
+ currentDepartment:Observable<Department|null>=this.department.asObservable();
   constructor(
-    private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+    private http:HttpClient,
+  ) {
+    this.header={Headers:new HttpHeaders({
+      "Content-type":"application/json"
+      ,'X-Access-Key':'$2a$10$8rkCpTdmdUdcXafaJZuWreEaLYhlfRHBLZiSZ2J3Ri3rCA99EhDKy'
+    })}
+  }
 
   //=============== College  Service ==============
-  getColleges(): Observable<College[]> {
-    return this.safeHttpCall<College[]>(`${environment.jsonBinApiUrl}/college`);
+  getColleges():Observable<College[]>{
+    return this.http.get<College[]>(`${environment.jsonBinApiUrl}/college`);
+  }
+  getCollege(Id:string):Observable<College>{
+    return this.http.get<College>(`${environment.jsonBinApiUrl}/college/${Id}`);
+  }
+  AddCollege(colleg:College):Observable<College>{
+    return this.http.post<College>(`${environment.jsonBinApiUrl}/college`,colleg,this.header);
+  }
+  DeleteCollege(college:College):Observable<College>{
+    return this.http.delete<College>(`${environment.jsonBinApiUrl}/college/${college.id}`,this.header);
+  }
+  updateCollege(college:College):Observable<College>{
+    return this.http.patch<College>(`${environment.jsonBinApiUrl}/college/${college.id}`,college,this.header);
   }
 
-  getCollege(Id: string): Observable<College> {
-    return this.safeHttpCall<College>(`${environment.jsonBinApiUrl}/college/${Id}`);
-  }
-
-  AddCollege(college: College): Observable<College> {
-    return this.safeHttpPost<College>(`${environment.jsonBinApiUrl}/college`, college);
-  }
-
-  DeleteCollege(college: College): Observable<College> {
-    return this.safeHttpDelete<College>(`${environment.jsonBinApiUrl}/college/${college.id}`);
-  }
-
-  updateCollege(college: College): Observable<College> {
-    return this.safeHttpPatch<College>(`${environment.jsonBinApiUrl}/college/${college.id}`, college);
-  }
 
   //================ Departments  Service =====================
-  getDepartments(id: string): Observable<Department[]> {
-    return this.safeHttpCall<Department[]>(`${environment.jsonBinApiUrl}/department?collegeId=${id}`);
+  getDepartments(id:string):Observable<Department[]>{
+    return this.http.get<Department[]>(`${environment.jsonBinApiUrl}/department?collegeId=${id}`);
   }
-
-  getDepartment_Doctor(): Observable<Department[]> {
-    return this.safeHttpCall<Department[]>(`${environment.jsonBinApiUrl}/department`);
+  getDepartment_Doctor():Observable<Department[]>{
+    return this.http.get<Department[]>(`${environment.jsonBinApiUrl}/department`);
   }
-
-  getDepartmentone(id: string): Observable<Department> {
-    return this.safeHttpCall<Department>(`${environment.jsonBinApiUrl}/department/${id}`);
+  getDepartmentone(id:string):Observable<Department>{
+    return this.http.get<Department>(`${environment.jsonBinApiUrl}/department/${id}`);
   }
-
-  AddDepartment(department: Department): Observable<Department> {
-    return this.safeHttpPost<Department>(`${environment.jsonBinApiUrl}/department`, department);
+  AddDepartment(department:Department):Observable<Department>{
+    return this.http.post<Department>(`${environment.jsonBinApiUrl}/department`,department,this.header);
   }
-
-  DeleteDepartment(department: Department): Observable<Department> {
-    return this.safeHttpDelete<Department>(`${environment.jsonBinApiUrl}/department/${department.id}`);
+  DeleteDepartment(department:Department):Observable<Department>{
+    return this.http.delete<Department>(`${environment.jsonBinApiUrl}/department/${department.id}`,this.header)
   }
-
-  updateDepartment(department: Department): Observable<Department> {
-    return this.safeHttpPatch<Department>(`${environment.jsonBinApiUrl}/department/${department.id}`, department);
-  }
+  updateDepartment(department:Department):Observable<Department>{
+        return this.http.patch<Department>(`${environment.jsonBinApiUrl}/department/${department.id}`,department,this.header);
+      }
 
   //================= Year  Service===================
-  getYears_Doctor(): Observable<Year[]> {
-    return this.safeHttpCall<Year[]>(`${environment.jsonBinApiUrl}/year`);
+  getYears_Doctor():Observable<Year[]>{
+    return this.http.get<Year[]>(`${environment.jsonBinApiUrl}/year`,this.header);
   }
-
-  getYears(id: string): Observable<Year[]> {
-    return this.safeHttpCall<Year[]>(`${environment.jsonBinApiUrl}/year?departmentId=${id}`);
+  getYears(id:string):Observable<Year[]>{
+    return this.http.get<Year[]>(`${environment.jsonBinApiUrl}/year?departmentId=${id}`,this.header);
   }
-
-  getYear(id: string): Observable<Year> {
-    return this.safeHttpCall<Year>(`${environment.jsonBinApiUrl}/year/${id}`);
+  getYear(id:string):Observable<Year>{
+    return this.http.get<Year>(`${environment.jsonBinApiUrl}/year/${id}`,this.header);
   }
-
-  AddYear(year: Year): Observable<Year> {
-    return this.safeHttpPost<Year>(`${environment.jsonBinApiUrl}/year`, year);
+  AddYear(year:Year):Observable<Year>{
+    return this.http.post<Year>(`${environment.jsonBinApiUrl}/year`,year,this.header);
   }
-
-  DeleteYear(year: Year): Observable<Year> {
-    return this.safeHttpDelete<Year>(`${environment.jsonBinApiUrl}/year/${year.id}`);
+  DeleteYear(year:Year):Observable<Year>{
+    return this.http.delete<Year>(`${environment.jsonBinApiUrl}/year/${year.id}`,this.header)
   }
-
-  updateYear(year: Year): Observable<Year> {
-    return this.safeHttpPatch<Year>(`${environment.jsonBinApiUrl}/year/${year.id}`, year);
+  updateYear(year:Year):Observable<Year>{
+    return this.http.patch<Year>(`${environment.jsonBinApiUrl}/year/${year.id}`,year,this.header);
   }
-
-  setDepartment(depart: Department) {
+  setDepartment(depart:Department){
     this.department.next(depart);
   }
-
-  getDepartment() {
+  getDepartment(){
     return this.department.value;
-  }
-
-  //================ Helper Methods ================
-  private safeHttpCall<T>(url: string): Observable<T> {
-    if (isPlatformBrowser(this.platformId)) {
-      return this.http.get<T>(url, this.header).pipe(
-        catchError(error => {
-          console.error(`Error fetching data from ${url}:`, error);
-          return of([] as unknown as T);
-        })
-      );
-    }
-    return of([] as unknown as T);
-  }
-
-  private safeHttpPost<T>(url: string, data: any): Observable<T> {
-    if (isPlatformBrowser(this.platformId)) {
-      return this.http.post<T>(url, data, this.header).pipe(
-        catchError(error => {
-          console.error(`Error posting data to ${url}:`, error);
-          return of(null as unknown as T);
-        })
-      );
-    }
-    return of(null as unknown as T);
-  }
-
-  private safeHttpDelete<T>(url: string): Observable<T> {
-    if (isPlatformBrowser(this.platformId)) {
-      return this.http.delete<T>(url, this.header).pipe(
-        catchError(error => {
-          console.error(`Error deleting data from ${url}:`, error);
-          return of(null as unknown as T);
-        })
-      );
-    }
-    return of(null as unknown as T);
-  }
-
-  private safeHttpPatch<T>(url: string, data: any): Observable<T> {
-    if (isPlatformBrowser(this.platformId)) {
-      return this.http.patch<T>(url, data, this.header).pipe(
-        catchError(error => {
-          console.error(`Error patching data to ${url}:`, error);
-          return of(null as unknown as T);
-        })
-      );
-    }
-    return of(null as unknown as T);
   }
 }
